@@ -19,41 +19,48 @@ export default function(){
     document.onmousewheel = wheel;
     //绑定firefox
     document.addEventListener && document.addEventListener('DOMMouseScroll',wheel);
+
+    let wheelTimer = null;
     function wheel(event) {
         event = event || window.event;
-
-        var flag = '';
-        if (event.wheelDelta) {
-            //ie/chrome
-            if (event.wheelDelta > 0) {
-                flag = 'up';
-            } else {
-                flag = 'down';
-            }
-        } else if (event.detail) {
-            //firefox
-            if (event.detail < 0) {
-                flag = 'up';
-            } else {
-                flag = 'down';
-            }
-        }
-
-        switch (flag) {
-            case 'up' :
-                if (nowIndex > 0){
-                    nowIndex--;
-                    move(nowIndex);
+        //函数防抖在最后一次执行，函数节流在第一次执行
+        clearTimeout(wheelTimer); //关闭前一次的定时器
+        //开启第一次定时器
+       wheelTimer = setTimeout(()=>{
+            var flag = '';
+            if (event.wheelDelta) {
+                //ie/chrome
+                if (event.wheelDelta > 0) {
+                    flag = 'up';
+                } else {
+                    flag = 'down';
                 }
-                break;
-            case 'down' :
-                if (nowIndex < 4){
-                    nowIndex++;
-                    move(nowIndex);
-
+            } else if (event.detail) {
+                //firefox
+                if (event.detail < 0) {
+                    flag = 'up';
+                } else {
+                    flag = 'down';
                 }
-                break;
-        }
+            }
+
+            switch (flag) {
+                case 'up' :
+                    if (nowIndex > 0){
+                        nowIndex--;
+                        move(nowIndex);
+                    }
+                    break;
+                case 'down' :
+                    if (nowIndex < 4){
+                        nowIndex++;
+                        move(nowIndex);
+
+                    }
+                    break;
+            }
+
+        },200);
 
         //禁止默认行为
         event.preventDefault && event.preventDefault();
@@ -69,7 +76,7 @@ export default function(){
             LiNodes[nowIndex].className='active';
             //切换小箭头的位置
             arrowNode.style.left=LiNodes[nowIndex].getBoundingClientRect().left + LiNodes[nowIndex].offsetWidth /2 -arrowHalfWidth +'px';
-            //内容区的top
+            //ul内容区的top
             ulNode.style.top = - nowIndex * contentHeight + 'px';
         }
     }
@@ -86,4 +93,13 @@ export default function(){
         };
     }
     arrowNode.style.left =LiNodes[0].getBoundingClientRect().left + LiNodes[0].offsetWidth /2 -arrowHalfWidth +'px';
+
+    //绑定窗口的缩放事件，修改小箭头和ul的位置
+    window.onresize = function(){
+        //修改小箭头的位置
+        arrowNode.style.left =LiNodes[nowIndex].getBoundingClientRect().left + LiNodes[nowIndex].offsetWidth /2 -arrowHalfWidth +'px';
+        //修改ul的位置
+        contentHeight = contentNode.offsetHeight;
+        ulNode.style.top = - nowIndex * contentHeight + 'px';
+    }
 }

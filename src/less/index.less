@@ -1,0 +1,60 @@
+//引入less默认样式文件夹
+@import "reset";
+
+#wrap{
+  height: 100%;
+  //头部
+  #header{
+    position: relative;
+    background: pink;
+    .header-min{
+      width: 1100px;
+      height: 80px;
+      margin: 0 auto;
+      .logo{
+        margin-top: 15px;
+        float: left;
+      }
+      .nav{
+        float: right;
+        margin-top: 50px;
+        li{
+          position: relative;
+          float: left;
+          margin-left: 40px;
+          color: #009EE0;
+          &:hover{
+            .down{
+              width: 100%;
+            }
+          }
+          //点击导航切换默认为第一个，第一个li加类名active然后设置width100%
+          &.active{
+            .down{
+              width: 100%;
+            }
+          }
+          .down{
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 0;
+            overflow: hidden;
+            color: #000;
+            transition: width 1s;
+          }
+        }
+      }
+      .arrow{
+        background: yellowgreen;
+        position: absolute;
+        left: 50%;
+        bottom: -11px;
+        background-image: url("../images/arrow.png");
+        background-repeat: no-repeat;
+        width: 21px;
+        height: 11px;
+      }
+    }
+  }
+}

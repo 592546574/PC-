@@ -68,7 +68,7 @@ export default function(){
     }
 
 
-    function move() {
+    function move(nowIndex) {
         //清除class样式
         for (var j = 0; j < LiNodes.length; j++) {
             LiNodes[j].className='';
@@ -92,12 +92,14 @@ export default function(){
 
         };
     }
+    //初始化小箭头来到第一个li下面
     arrowNode.style.left =LiNodes[0].getBoundingClientRect().left + LiNodes[0].offsetWidth /2 -arrowHalfWidth +'px';
-
+      move(1);
     //绑定窗口的缩放事件，修改小箭头和ul的位置
     window.onresize = function(){
         //修改小箭头的位置
         arrowNode.style.left =LiNodes[nowIndex].getBoundingClientRect().left + LiNodes[nowIndex].offsetWidth /2 -arrowHalfWidth +'px';
+
         //修改ul的位置
         contentHeight = contentNode.offsetHeight;
         ulNode.style.top = - nowIndex * contentHeight + 'px';

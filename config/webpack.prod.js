@@ -31,8 +31,8 @@ const webpack = require('webpack');
 
 module.exports = {
   //入口起点
-  entry: './src/js/index.js',
-  //输出
+  entry: ['./src/js/index.js', './src/index.html'],
+    //   //输出
   output: {
     path: resolve(__dirname, '../dist'),
     filename: './js/[hash:10].js'
@@ -69,6 +69,12 @@ module.exports = {
           }
         ]
       },
+        {
+            test: /\.(html)$/,
+            use: {
+                loader: 'html-loader'
+            }
+        },
       {
         test: /\.js$/, // 涵盖 .js 文件
         enforce: "pre", // 预先加载好 jshint loader
@@ -82,11 +88,11 @@ module.exports = {
               camelcase: true,
               //jslint 的错误信息在默认情况下会显示为 warning（警告）类信息
               //将 emitErrors 参数设置为 true 可使错误显示为 error（错误）类信息
-              emitErrors: true,
+              emitErrors: false,
               //jshint 默认情况下不会打断webpack编译
               //如果你想在 jshint 出现错误时，立刻停止编译
               //请设置 failOnHint 参数为true
-              failOnHint: true,
+              failOnHint: false,
               esversion: 6,
               loopfunc:true
               // 自定义报告函数

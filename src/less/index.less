@@ -1,6 +1,13 @@
 //引入less默认样式文件夹
 @import "reset";
-
+//公共样式
+.common-title{
+      color:#009ee0;
+      font-size:80px;
+      line-height:0.8;
+      font-weight:bold;
+      letter-spacing:-5px;
+    }
 #wrap{
   position: relative;
   height: 100%;
@@ -47,7 +54,6 @@
         }
       }
       .arrow{
-        background: yellowgreen;
         position: absolute;
         left: 50%;
         bottom: -11px;
@@ -68,8 +74,6 @@
     bottom: 0;
     top: 80px;
     right: 0;
-    width:100%;
-    height: 100%;
     overflow: hidden;
     >ul{
       position: absolute;
@@ -93,8 +97,107 @@
           right: 0;
           bottom: 0;
           margin: auto;
+          &.home{
+            .home-carousel{
+              position: relative;
+              width: 100%;
+              height: 100%;
+              transform-style: preserve-3d;
+              perspective: 1000px;
+              li{
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                height: 100%;
+                text-align: center;
+                line-height: 520px;
+                color: #fff;
+                //transform-style: preserve-3d;perspective: 1000px;解决3d旋转visibility:hidden,visible解决上边压的一层
+                visibility: hidden;
+                &.show{
+                  visibility: visible;
+                }
+                &.leftHide{
+                  visibility: hidden;
+                  animation: leftHide 2s linear;
+                }
+                &.rightShow{
+                  visibility: visible;
+                  animation: rightShow 2s linear;
+                }
+                &.leftShow{
+                  visibility: visible;
+                  animation: leftShow 2s linear;
+                }
+                &.rightHide{
+                  visibility: hidden;
+                  animation: rightHide 2s linear;
+                }
+                &:nth-child(1){
+                  background:#dc6c5f;
+                }
+                &:nth-child(2){
+                  background:#95dc84;
+                }
+                &:nth-child(3){
+                  background:#64b9d2;
+                }
+                &:nth-child(4){
+                  background:#000000;
+                }
+              }
+            }
+            .home-points{
+              position: absolute;
+              //解决小圆点水平居中
+              left: 50%;
+              transform: translateX(-50%);
+              bottom: 0;
+              li{
+                border-radius: 50%;
+                float: left;
+                width: 20px;
+                height: 20px;
+                background-color:rgba(255,255,255,0.5);
+                //四周缝隙
+                margin: 2px;
+                box-shadow:0 0 4px rgba(25,25,25,0.8) ;
+                //默认第一个小圆点为指定的颜色白色
+                &.active{
+                  background-color:rgba(255,255,255,1);
+                }
+              }
+            }
+          }
         }
       }
     }
   }
 }
+//第一屏动画
+//向左点击左图片向右旋转最后右边图片压住左边图片
+@keyframes leftHide {
+  0%{visibility: visible;transform: translateZ(0)}
+  50%{transform: translateX(-40%) rotateY(30deg) scale(0.8)}
+  100%{visibility: hidden;transform: translateZ(-200px);}
+}
+@keyframes rightShow {
+  0%{visibility: hidden;transform: translateZ(-200px)}
+  50%{transform: translateX(40%) rotateY(-30deg) scale(0.8)}
+  100%{visibility: visible;transform: translateZ(0);}
+}
+//向右点击按钮
+@keyframes leftShow {
+  0%{visibility: hidden;transform: translateZ(-200px)}
+  50%{transform: translateX(-40%) rotateY(30deg)scale(0.8)}
+  100%{visibility: visible;transform: translateZ(0);}
+}
+@keyframes rightHide {
+  0%{visibility: visible;transform: translateZ(0)}
+  50%{transform: translateX(40%) rotateY(-30deg)scale(0.8)}
+  100%{visibility: hidden;transform: translateZ(-200px);}
+}
+
+
+

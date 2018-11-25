@@ -101,5 +101,5 @@ export default function(){
         //修改ul的位置
         contentHeight = contentNode.offsetHeight;
         ulNode.style.top = - nowIndex * contentHeight + 'px';
-    }
+    };
 }

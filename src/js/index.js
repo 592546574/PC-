@@ -6,6 +6,8 @@ import main from './main';
 import firsView from './firsView';
 //引入第五屏js
 import canvasView from './canvasView';
+//手动引入音乐播放器
+import '../images/audio.mp3';
 main();
 firsView();
 canvasView();

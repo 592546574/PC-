@@ -4,6 +4,8 @@ import '../less/index.less';
 import main from './main';
 //引入第一屏小圆点切换
 import firsView from './firsView';
-
+//引入第五屏js
+import canvasView from './canvasView';
 main();
 firsView();
+canvasView();

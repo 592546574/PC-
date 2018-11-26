@@ -360,6 +360,7 @@
               height: 200px;
               border: 5px rgba(255,255,255,0.5) solid;
               border-radius: 8px;
+              z-index: 10;
               &:nth-of-type(1){
                 left: 750px;
                 top: 50px;
@@ -430,19 +431,40 @@
           }
           &.team{
             .team-title{
+              float: left;
               width: 400px;
               margin: 50px;
             }
             .team-text{
-              position: absolute;
-              right: 40px;
-              top: -5px;
+              float: right;
               margin: 50px;
               width: 400px;
             }
             .team-list{
-              &:nth-child(1){
-                background-position: 3px 0px;
+              width: 944px;
+              height: 448px;
+              position: absolute;
+              top: 230px;
+              left: 50%;
+              transform: translateX(-50%);
+              li{
+                height: 100%;
+                float: left;
+                background-image: url("../images/team.png");
+                background-repeat: no-repeat;
+                width: 236px;
+                &:nth-child(1){
+                  background-position: 3px 0px;
+                }
+                &:nth-child(2){
+                  background-position: -230px 0px;
+                }
+                &:nth-child(3){
+                  background-position: -483px 0px;
+                }
+                &:nth-child(4){
+                  background-position: -710px 0px;
+                }
               }
             }
           }

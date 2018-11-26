@@ -88,7 +88,7 @@
     top: 80px;
     right: 0;
     overflow: hidden;
-    >ul{
+    .content-main{
       position: absolute;
       //解决图片过渡
       transition: top 1s;
@@ -468,6 +468,22 @@
               }
             }
           }
+        }
+      }
+    }
+    .content-nav{
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      li{
+        width: 15px;
+        height: 15px;
+        border: 1px solid white;
+        border-radius: 50%;
+        margin-top: 10px;
+        &.active{
+          background: white;
         }
       }
     }

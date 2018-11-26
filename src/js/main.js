@@ -6,6 +6,8 @@ export default function(){
     const ulNode = document.querySelector('#content>ul');
     //获取content
     const contentNode = document.querySelector('#content');
+    //获取侧边导航小圆点
+    const contentNavLiNodes =document.querySelectorAll('.content-nav li');
 
     //缓存小箭头一半的宽度
     const arrowHalfWidth = arrowNode.offsetWidth / 2;
@@ -72,8 +74,10 @@ export default function(){
         //清除class样式
         for (var j = 0; j < LiNodes.length; j++) {
             LiNodes[j].className='';
+            contentNavLiNodes[j].className='';
             //当前点击哪个谁添加样式
             LiNodes[nowIndex].className='active';
+            contentNavLiNodes[nowIndex].className='active';
             //切换小箭头的位置
             arrowNode.style.left=LiNodes[nowIndex].getBoundingClientRect().left + LiNodes[nowIndex].offsetWidth /2 -arrowHalfWidth +'px';
             //ul内容区的top
@@ -83,14 +87,19 @@ export default function(){
 
 
 
-//便利绑定事件监听
+//遍历绑定事件监听
     for (let i = 0; i < LiNodes.length; i++) {
         LiNodes[i].onclick =function () {
             //初始化nowIndex的值
             nowIndex = i;
             move(nowIndex);
-
         };
+        //侧边小圆点遍历
+        contentNavLiNodes[i].onclick=function(){
+            //初始化nowIndex的值
+            nowIndex = i;
+            move(nowIndex);
+        }
     }
     //初始化小箭头来到第一个li下面
     arrowNode.style.left =LiNodes[0].getBoundingClientRect().left + LiNodes[0].offsetWidth /2 -arrowHalfWidth +'px';

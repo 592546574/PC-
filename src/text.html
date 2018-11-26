@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        body{
+            background: #000000;
+        }
+        #myCanvas{
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            margin: auto;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+<canvas id="myCanvas" width="150px" height="400px"></canvas>
+<script type="text/javascript">
+    //创建canvas
+    const canvas =document.createElement('canvas');
+    //设置宽高
+    canvas.width = width;
+    canvas.height =height;
+    //指定位置
+    canvas.style.position = 'absolute';
+    canvas.style.top = '0';
+    canvas.left = index * width +'px';
+    //画圆并气泡运动
+    //生效
+
+    //生成随机圆
+    let circleArr = [];
+    //生成随机圆.颜色
+    const r = Math.round(Math.random() * 255);
+    const g = Math.round(Math.random() * 255);
+    const b = Math.round(Math.random() * 255);
+    //半径随机
+    const circle_r =Math.round(Math.random() * 8 + 2);
+    //位置随机
+    const x = Math.random() * width;
+    const y = Math.random() * height
+</script>
+</body>
+</html>

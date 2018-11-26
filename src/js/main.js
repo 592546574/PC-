@@ -11,6 +11,19 @@ export default function(){
     //获取音乐播放器
     const musicNode = document.querySelector('.music');
     const audioNode = document.querySelector('.music audio');
+    //出入场动画获取li
+    const homeCarouselNode = document.querySelector('.home-carousel');
+    const plane1Node = document.querySelector('.course-plane1');
+    const plane2Node = document.querySelector('.course-plane2');
+    const plane3Node = document.querySelector('.course-plane3');
+    const pencil1Node = document.querySelector('.works-pencil1');
+    const pencil2Node = document.querySelector('.works-pencil2');
+    const pencil3Node = document.querySelector('.works-pencil3');
+    const aboutListsNodes = document.querySelector('.about-lists');
+    const teamTitleNode = document.querySelector('.team-title');
+    const teamTextNode = document.querySelector('.team-text');
+
+
 
     //缓存小箭头一半的宽度
     const arrowHalfWidth = arrowNode.offsetWidth / 2;
@@ -20,6 +33,81 @@ export default function(){
     let contentHeight = contentNode.offsetHeight;
     //代表li的下表为0
     let nowIndex = 0;
+    //定义出入场变量接收
+    let lastIndex = 0;
+
+    const animation = [
+        {
+            //第一屏
+            anIn(){
+                homeCarouselNode.style.transform = 'translateY(0)';
+                homeCarouselNode.style.opacity = 1;
+            },
+            anOut(){
+                homeCarouselNode.style.transform = 'translateY(-50%)';
+                homeCarouselNode.style.opacity = 0.2;
+            }
+        },
+        //第二屏
+        {
+            anIn(){
+                plane1Node.style.transform = 'translate(0,0)';
+                plane2Node.style.transform = 'translate(0,0)';
+                plane3Node.style.transform = 'translate(0,0)';
+            },
+            anOut(){
+                plane1Node.style.transform = 'translate(-100px 100px)';
+                plane2Node.style.transform = 'translate(-100px -100px)';
+                plane3Node.style.transform = 'translate(100px -100px)';
+            }
+        },
+        //第三屏
+        {
+            anIn(){
+                pencil1Node.style.transform = 'translateY(0)';
+                pencil2Node.style.transform = 'translateY(0)';
+                pencil3Node.style.transform = 'translateY(0)';
+            },
+            anOut(){
+                pencil1Node.style.transform = 'translateY(-100px)';
+                pencil2Node.style.transform = 'translateY(100px)';
+                pencil3Node.style.transform = 'translateY(100px)';
+            }
+        },
+        //第四屏
+        {
+            anIn(){
+                aboutListsNodes.style.transform = 'rotate(0)';
+                aboutListsNodes.style.transform = 'rotate(0)';
+            },
+            anOut(){
+                aboutListsNodes.style.transform = 'rotate(45deg)';
+                aboutListsNodes.style.transform = 'rotate(-45deg)';
+
+            }
+        },
+        //第五屏
+        {
+            anIn(){
+                teamTitleNode.style.transform = 'translateX(0)';
+                teamTextNode.style.transform = 'translateX(0)';
+            },
+            anOut(){
+                teamTitleNode.style.transform = 'translateX(-100PX)';
+                teamTextNode.style.transform = 'translateX(100PX)';
+
+            }
+        },
+    ]
+    //默认一上来所有屏做出入场动画
+    for (var i = 0; i <animation .length; i++) {
+        animation[i].anOut()
+    }
+    //默认第一屏做入场动画
+    setTimeout(function(){
+        animation[0].anIn();
+    },2000);
+
     //先绑定ie/chrome
     document.onmousewheel = wheel;
     //绑定firefox
@@ -85,6 +173,13 @@ export default function(){
             arrowNode.style.left=LiNodes[nowIndex].getBoundingClientRect().left + LiNodes[nowIndex].offsetWidth /2 -arrowHalfWidth +'px';
             //ul内容区的top
             ulNode.style.top = - nowIndex * contentHeight + 'px';
+
+            //让上一屏做出场动画
+            animation[lastIndex].anOut();
+            //让下一屏做入场动画
+            animation[nowIndex].anIn();
+            //同步更新坐标值
+            lastIndex = nowIndex;
         }
     }
 
